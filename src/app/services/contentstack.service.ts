@@ -15,7 +15,7 @@ type Stack = ReturnType<typeof contentstack.default.stack>;
 })
 
 export class ContentstackService {
-  private stack: Stack;
+  private readonly stack: Stack;
 
   constructor() {
     const { contentstack: config } = environment;
