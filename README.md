@@ -62,23 +62,29 @@ Go to Settings > Tokens and create a delivery token. Select the `preview` scope 
 
 > In the case of Angular 18, check the settings in the environment and make sure the url is: `http://localhost:4200/` instead of `http://localhost:3000/`
 
-### Fill out your environment settings.
+### Configure your environment variables
 
-Now that you have a delivery token, you can fill out the `./src/environments/environment.ts` file in your codebase.
+This project uses environment variables to keep API keys secure and out of version control.
 
-```js
-export const environment = {
-  production: false,
-  contentstack: {
-    apiKey: "<YOUR_API_KEY>",
-    deliveryToken: "<YOUR_DELIVERY_TOKEN>",
-    previewToken: "<YOUR_PREVIEW_TOKEN>",
-    environment: "preview",
-    region: "EU",
-    preview: true,
-  },
-};
-```
+1. Copy the `.env.example` file to `.env`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Fill out the `.env` file with your actual values:
+   ```env
+   NG_APP_CONTENTSTACK_API_KEY=<YOUR_API_KEY>
+   NG_APP_CONTENTSTACK_DELIVERY_TOKEN=<YOUR_DELIVERY_TOKEN>
+   NG_APP_CONTENTSTACK_PREVIEW_TOKEN=<YOUR_PREVIEW_TOKEN>
+   NG_APP_CONTENTSTACK_ENVIRONMENT=preview
+   NG_APP_CONTENTSTACK_REGION=EU
+   NG_APP_CONTENTSTACK_PREVIEW=true
+   ```
+
+The environment files (`src/environments/environment.ts` and `src/environments/environment.production.ts`) are automatically generated from your `.env` file when you run `npm start` or `npm run build`.
+
+> **Important:** Never commit the `.env` file to your repository. It's already included in `.gitignore` to prevent accidental commits of your API keys.
 
 ### Turn on Live Preview
 

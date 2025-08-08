@@ -1,6 +1,6 @@
 {
   "name": "kickstart-angular",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "repository": {
     "type": "git",
@@ -12,7 +12,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "prestart": "node generate-env.js",
     "start": "ng serve",
+    "prebuild": "node generate-env.js",
     "build": "ng build"
   },
   "dependencies": {
@@ -35,6 +37,7 @@
     "@angular/compiler-cli": "20.1.6",
     "@types/react": "^19.1.9",
     "autoprefixer": "10.4.21",
+    "dotenv": "^17.2.1",
     "postcss": "8.5.6",
     "typescript": "5.8.3"
   }
