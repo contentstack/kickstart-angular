@@ -5,4 +5,8 @@ fileignoreconfig:
   - filename: package-lock.json
     ignore_detectors:
       - filecontent
+  - filename: generate-env.js
+    checksum: 04444a19d0ac887d72b234606010e52e6c315b79e21e01fb78dc3bcb62c7f5e9
+  - filename: src/vite-env.d.ts
+    checksum: 768fe1afcd0be82f8d594d60700dc7e6eab02ea3f43e1f2a32bce9cc5439449c
 version: "1.0"
