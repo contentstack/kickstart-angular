@@ -6,7 +6,6 @@ import type { Page } from '../../../types'
 import ContentstackLivePreview from "@contentstack/live-preview-utils";
 import { environment } from '../../environments/environment';
 import { IStackSdk } from '@contentstack/live-preview-utils';
-import { getContentstackEndpoints, getRegionForString } from "@timbenniks/contentstack-endpoints";
 
 type Stack = ReturnType<typeof contentstack.default.stack>;
 
@@ -20,18 +19,16 @@ export class ContentstackService {
   constructor() {
     const { contentstack: config } = environment;
 
-    const region = getRegionForString(config.region);
-    const endpoints = getContentstackEndpoints(region, true)
-
     this.stack = contentstack.default.stack({
       apiKey: config.apiKey,
       deliveryToken: config.deliveryToken,
       environment: config.environment,
-      region,
+      region: config.region as Region,
+      host: config.contentDelivery,
       live_preview: {
         enable: true,
         preview_token: config.previewToken,
-        host: endpoints.preview,
+        host: config.previewHost
       }
     })
 
@@ -47,7 +44,7 @@ export class ContentstackService {
           branch: 'main'
         },
         clientUrlParams: {
-          host: endpoints.application
+          host: config.applicationHost
         },
         editButton: {
           enable: true,
