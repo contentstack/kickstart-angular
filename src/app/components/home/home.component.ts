@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { ContentstackService } from '../../services/contentstack.service';
 import ContentstackLivePreview from "@contentstack/live-preview-utils";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './home.component.html',
 })
 
 export class HomeComponent implements OnInit {
-  page: any;
-  error: string = '';
+  private readonly contentstackService = inject(ContentstackService);
 
-  constructor(private contentstackService: ContentstackService) { }
+  readonly page = signal<any>(null);
+  readonly error = signal<string>('');
 
   getContent() {
     this.contentstackService.getEntryByUrl('page', '/').subscribe({
       next: (result) => {
-        this.page = result;
+        this.page.set(result);
       },
       error: (err) => {
-        this.error = 'Error loading content. Please check your Contentstack configuration.';
+        this.error.set('Error loading content. Please check your Contentstack configuration.');
         console.error('Contentstack error:', err);
       }
     });
@@ -32,5 +31,8 @@ export class HomeComponent implements OnInit {
     ContentstackLivePreview.onEntryChange(() => {
       this.getContent()
     });
+
+    // Load initial content
+    this.getContent();
   }
 }
