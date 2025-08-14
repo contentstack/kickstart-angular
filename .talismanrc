@@ -9,4 +9,8 @@ fileignoreconfig:
     checksum: 04444a19d0ac887d72b234606010e52e6c315b79e21e01fb78dc3bcb62c7f5e9
   - filename: src/vite-env.d.ts
     checksum: 768fe1afcd0be82f8d594d60700dc7e6eab02ea3f43e1f2a32bce9cc5439449c
+  - filename: src/environments/environment.production.ts
+    checksum: 1570d43ee999165676c4aff62e7c432d85e41ae305336fba59735da90e2b9fa3
+  - filename: src/environments/environment.ts
+    checksum: b5f7cb1134e1cd8b1e36914af8834a2a36451e5b36bf84aea5606316ddd7e7cf
 version: "1.0"
