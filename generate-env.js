@@ -13,11 +13,19 @@ const envPath = path.join(__dirname, ".env");
 let envVars = {};
 
 if (fs.existsSync(envPath)) {
+  // Development: read from .env file
   const envContent = fs.readFileSync(envPath, "utf8");
   envContent.split("\n").forEach((line) => {
     const [key, value] = line.split("=");
     if (key && value) {
       envVars[key.trim()] = value.trim();
+    }
+  });
+} else {
+  // Production: read from process.env
+  Object.keys(process.env).forEach((key) => {
+    if (key.startsWith('NG_APP_CONTENTSTACK_')) {
+      envVars[key] = process.env[key];
     }
   });
 }
