@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
-const {
-  getContentstackEndpoints,
-  getRegionForString,
-} = require("@timbenniks/contentstack-endpoints");
+const { getContentstackEndpoint } = require("@contentstack/utils");
 
 const fs = require("fs");
 const path = require("path");
@@ -30,8 +27,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const region = getRegionForString(envVars.NG_APP_CONTENTSTACK_REGION);
-const endpoints = getContentstackEndpoints(region, true);
+const endpoints = getContentstackEndpoint(envVars.NG_APP_CONTENTSTACK_REGION || 'us', '', true);
 
 // Generate environment.ts content
 const environmentContent = `export const environment = {
@@ -41,21 +37,12 @@ const environmentContent = `export const environment = {
     deliveryToken: '${envVars.NG_APP_CONTENTSTACK_DELIVERY_TOKEN || ""}',
     previewToken: '${envVars.NG_APP_CONTENTSTACK_PREVIEW_TOKEN || ""}',
     environment: '${envVars.NG_APP_CONTENTSTACK_ENVIRONMENT || "preview"}',
-    region: '${region ? region : envVars.NG_APP_CONTENTSTACK_REGION}',
+    region: '${envVars.NG_APP_CONTENTSTACK_REGION || "us"}',
     preview: ${envVars.NG_APP_CONTENTSTACK_PREVIEW === "true"},
 
-    contentDelivery: '${
-      envVars.NG_APP_CONTENTSTACK_CONTENT_DELIVERY ||
-      (endpoints && endpoints.contentDelivery)
-    }',
-    previewHost: '${
-      envVars.NG_APP_CONTENTSTACK_PREVIEW_HOST ||
-      (endpoints && endpoints.preview)
-    }',
-    applicationHost: '${
-      envVars.NG_APP_CONTENTSTACK_CONTENT_APPLICATION ||
-      (endpoints && endpoints.application)
-    }'
+    contentDelivery: '${envVars.NG_APP_CONTENTSTACK_CONTENT_DELIVERY || endpoints.contentDelivery}',
+    previewHost: '${envVars.NG_APP_CONTENTSTACK_PREVIEW_HOST || endpoints.preview}',
+    applicationHost: '${envVars.NG_APP_CONTENTSTACK_CONTENT_APPLICATION || endpoints.application}'
   }
 };
 `;
@@ -68,21 +55,12 @@ const environmentProdContent = `export const environment = {
     deliveryToken: '${envVars.NG_APP_CONTENTSTACK_DELIVERY_TOKEN || ""}',
     previewToken: '${envVars.NG_APP_CONTENTSTACK_PREVIEW_TOKEN || ""}',
     environment: '${envVars.NG_APP_CONTENTSTACK_ENVIRONMENT || "preview"}',
-    region: '${region ? region : envVars.NG_APP_CONTENTSTACK_REGION}',
+    region: '${envVars.NG_APP_CONTENTSTACK_REGION || "us"}',
     preview: ${envVars.NG_APP_CONTENTSTACK_PREVIEW === "true"},
 
-    contentDelivery: '${
-      envVars.NG_APP_CONTENTSTACK_CONTENT_DELIVERY ||
-      (endpoints && endpoints.contentDelivery)
-    }',
-    previewHost: '${
-      envVars.NG_APP_CONTENTSTACK_PREVIEW_HOST ||
-      (endpoints && endpoints.preview)
-    }',
-    applicationHost: '${
-      envVars.NG_APP_CONTENTSTACK_CONTENT_APPLICATION ||
-      (endpoints && endpoints.application)
-    }'
+    contentDelivery: '${envVars.NG_APP_CONTENTSTACK_CONTENT_DELIVERY || endpoints.contentDelivery}',
+    previewHost: '${envVars.NG_APP_CONTENTSTACK_PREVIEW_HOST || endpoints.preview}',
+    applicationHost: '${envVars.NG_APP_CONTENTSTACK_CONTENT_APPLICATION || endpoints.application}'
 
   }
 };
