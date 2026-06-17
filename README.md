@@ -113,3 +113,43 @@ Go to `http://localhost:4200/`.
 Go to Entries and select the only entry in the list.
 In the sidebar, click on the live preview icon.
 Or, click on visual experience in the sidebar.
+
+## Regions and endpoint configuration
+
+Set `NG_APP_CONTENTSTACK_REGION` to the value matching your Contentstack account region:
+
+| Region | Value |
+|---|---|
+| North America (default) | `NA` or `US` |
+| Europe | `EU` |
+| Australia | `AU` |
+| Azure North America | `AZURE-NA` |
+| Azure Europe | `AZURE-EU` |
+| GCP North America | `GCP-NA` |
+| GCP Europe | `GCP-EU` |
+
+The app uses `getContentstackEndpoint` from `@contentstack/utils` to resolve the correct API hostnames for your region automatically (via `generate-env.js` at build time). The following endpoint keys are resolved:
+
+| Key | NA value |
+|---|---|
+| `contentDelivery` | `cdn.contentstack.io` |
+| `preview` | `rest-preview.contentstack.com` |
+| `application` | `app.contentstack.com` |
+| `graphqlDelivery` | `graphql.contentstack.com` |
+| `graphqlPreview` | `graphql-preview.contentstack.com` |
+| `images` | `images.contentstack.io` |
+| `assets` | `assets.contentstack.io` |
+| `contentManagement` | `api.contentstack.io` |
+| `auth` | `auth.contentstack.io` |
+
+### Custom or dedicated environments
+
+If you are on a dedicated or private cloud Contentstack instance, you can override the resolved endpoints via environment variables:
+
+```
+NG_APP_CONTENTSTACK_CONTENT_DELIVERY=your-custom-cdn.example.com
+NG_APP_CONTENTSTACK_PREVIEW_HOST=your-custom-preview.example.com
+NG_APP_CONTENTSTACK_CONTENT_APPLICATION=your-custom-app.example.com
+```
+
+These override values take precedence over the region-resolved endpoints.
