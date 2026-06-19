@@ -27,7 +27,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const endpoints = getContentstackEndpoint(envVars.NG_APP_CONTENTSTACK_REGION || 'us', '', true);
+const endpoints = getContentstackEndpoint(envVars.NG_APP_CONTENTSTACK_REGION || 'NA', '', true);
 
 // Generate environment.ts content
 const environmentContent = `export const environment = {
@@ -37,7 +37,7 @@ const environmentContent = `export const environment = {
     deliveryToken: '${envVars.NG_APP_CONTENTSTACK_DELIVERY_TOKEN || ""}',
     previewToken: '${envVars.NG_APP_CONTENTSTACK_PREVIEW_TOKEN || ""}',
     environment: '${envVars.NG_APP_CONTENTSTACK_ENVIRONMENT || "preview"}',
-    region: '${envVars.NG_APP_CONTENTSTACK_REGION || "us"}',
+    region: '${envVars.NG_APP_CONTENTSTACK_REGION || "NA"}',
     preview: ${envVars.NG_APP_CONTENTSTACK_PREVIEW === "true"},
 
     contentDelivery: '${envVars.NG_APP_CONTENTSTACK_CONTENT_DELIVERY || endpoints.contentDelivery}',
@@ -55,7 +55,7 @@ const environmentProdContent = `export const environment = {
     deliveryToken: '${envVars.NG_APP_CONTENTSTACK_DELIVERY_TOKEN || ""}',
     previewToken: '${envVars.NG_APP_CONTENTSTACK_PREVIEW_TOKEN || ""}',
     environment: '${envVars.NG_APP_CONTENTSTACK_ENVIRONMENT || "preview"}',
-    region: '${envVars.NG_APP_CONTENTSTACK_REGION || "us"}',
+    region: '${envVars.NG_APP_CONTENTSTACK_REGION || "NA"}',
     preview: ${envVars.NG_APP_CONTENTSTACK_PREVIEW === "true"},
 
     contentDelivery: '${envVars.NG_APP_CONTENTSTACK_CONTENT_DELIVERY || endpoints.contentDelivery}',
