@@ -1,6 +1,6 @@
 {
   "name": "kickstart-angular",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "repository": {
     "type": "git",
@@ -38,7 +38,7 @@
     "@types/react": "^19.2.17",
     "@tailwindcss/postcss": "^4.3.1",
     "dotenv": "^17.4.2",
-    "postcss": "8.5.15",
+    "postcss": "8.5.24",
     "typescript": "5.9.3",
     "vite": "^6.4.3"
   },
