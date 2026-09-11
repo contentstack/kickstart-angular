@@ -20,7 +20,7 @@
   "dependencies": {
     "@angular/common": "21.2.19",
     "@angular/compiler": "21.2.19",
-    "@angular/core": "21.2.19",
+    "@angular/core": "21.2.20",
     "@angular/platform-browser": "21.2.19",
     "@angular/router": "21.2.19",
     "@contentstack/delivery-sdk": "^5.5.2",
